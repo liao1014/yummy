@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 || 訂單查詢</title>
+    <link rel="stylesheet" href="buy.css">
+    <style>
+        .status li.active {
+            color: red;
+            font-weight: bold;
+        }
+        .status li.active::before {
+            content: "➤ ";
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>大吃一斤</h1>
+    </header>
+
+    <div class="buy01">
+        <h2>訂單進度查詢</h2>
+        <p>訂單編號：<span id="displayOrderId">尚未有訂單</span></p>
+        <p>訂單總金額：$<span id="displayTotal">0</span></p>
+        <ul class="status">
+            <li id="step1"> 訂單成立</li>
+            <li> 處理中</li>
+            <li> 已出貨</li>
+            <li> 已完成取貨</li>
+        </ul>
+        <br>
+        <a href="front_page.html" class="set">回到首頁</a>
+    </div>
+
+    <script>
+        const orderData = JSON.parse(localStorage.getItem("lastOrder"));
+        
+        if (orderData) {
+            document.getElementById("displayOrderId").textContent = orderData.id;
+            document.getElementById("displayTotal").textContent = orderData.total;
+            document.getElementById("step1").classList.add("active");
+        } else {
+            document.querySelector(".buy01").innerHTML = "<h2>暫無訂單資訊</h2><a href='front_page.html'>回首頁</a>";
+        }
+    </script>
+</body>
+</html>
