@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 || 會員資料設定</title>
+    <link rel="stylesheet" href="member.css">
+</head>
+<body>
+    <div class="member01">
+
+        <h2>會員資料設定</h2>
+        <form action="index.html">
+            <label>姓名
+                <input type="text" id="user-name" required/>
+            </label>
+            <label>電話
+                <input type="tel" id="user-tel"/>
+            </label>
+            <label>收件地址
+                <input type="text" id="user-address"/>
+            </label>
+            <button type="submit">儲存資料</button>
+
+        </form>
+
+        <hr>
+        <h3>目前會員資訊</h3>
+        <ul id="member-info"></ul>
+
+        <h3>歷史訂單紀錄</h3>
+        <table id="order-table" border="1" style="width:100%; border-collapse: collapse;">
+            <tr>
+                <th>訂單編號</th>
+                <th>金額</th>
+                <th>狀態</th>
+            </tr>
+        </table>
+
+        <h3>我的評價</h3>
+        <div id="review-list"></div>
+
+    </div>
+
+    <script>
+        if (localStorage.getItem("isLogin") !== "true") {
+            alert("請先登入會員");
+            location.href = "membersign.html";
+        }
+
+        function loadProfile() {
+            const member = JSON.parse(localStorage.getItem("memberData")) || {
+                name: "預設會員",
+                email: "user@example.com",
+                signup: "尚未紀錄",
+                phone: "",
+                address: ""
+            };
+
+            document.getElementById("member-info").innerHTML = `
+                <li>會員名稱：${member.name}</li>
+                <li>Email：${member.email}</li>
+                <li>註冊時間：${member.signup}</li>
+            `;
+
+            document.getElementById("user-name").value = member.name;
+            if(member.phone) document.getElementById("user-tel").value = member.phone;
+            if(member.address) document.getElementById("user-address").value = member.address;
+        }
+
+        document.getElementById("profile-form").onsubmit = function(e) {
+            e.preventDefault();
+            
+            let member = JSON.parse(localStorage.getItem("memberData")) || {};
+            member.name = document.getElementById("user-name").value;
+            member.phone = document.getElementById("user-tel").value;
+            member.address = document.getElementById("user-address").value;
+
+            localStorage.setItem("memberData", JSON.stringify(member));
+            alert("會員資料儲存成功！");
+            loadProfile();
+        };
+
+        function loadOrders() {
+            const realOrders = JSON.parse(localStorage.getItem("orders")) || [];
+            const demoOrders = [{ id: "#20250101", total: 300, status: "範例訂單" }];
+            const orders = realOrders.length > 0 ? realOrders : demoOrders;
+
+            const orderTable = document.getElementById("order-table");
+            
+            orders.forEach(order => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${order.id || "無編號"}</td>
+                    <td>$${order.total || 0}</td>
+                    <td>處理中</td>
+                `;
+                orderTable.appendChild(tr);
+            });
+        }
+
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem("memberReviews")) || [
+                { product: "巧克力餅乾", rating: 4 }
+            ];
+            
+            const reviewList = document.getElementById("review-list");
+            reviewList.innerHTML = ""; 
+            reviews.forEach(r => {
+                const stars = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
+                const p = document.createElement("p");
+                p.textContent = `${r.product} ${stars}`;
+                reviewList.appendChild(p);
+            });
+        }
+
+        loadProfile();
+        loadOrders();
+        loadReviews();
+    </script>
+</body>
+</html>
