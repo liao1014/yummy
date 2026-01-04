@@ -1,0 +1,228 @@
+body {
+    font-family: "Microsoft JhengHei", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fffaf3;
+    color: #333333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFE3B3; 
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0c89d;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-logo, .nav-icon {
+    height: 40px;
+    width: auto;
+}
+
+.search-bar {
+    width: 90%;
+    height: 35px;
+    padding: 0 15px;
+    border-radius: 20px;
+    border: 1px solid #d4b483;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.product-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 30px 0;
+    border-bottom: 1px solid #e0c89d;
+}
+
+.product-img {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-details {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.price-stock {
+    font-size: 20px;
+    color: #b08d57;
+    font-weight: bold;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-selector input {
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #d4b483;
+    border-radius: 4px;
+}
+
+.btn-submit {
+    background-color: #b08d57;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: fit-content;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #8e6f42;
+}
+
+.product-info-section {
+    padding: 30px 0;
+}
+
+.info-tabs {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    cursor: pointer;
+    color: #b08d57;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+.divider {
+    margin: 0 10px;
+    color: #ccc;
+}
+
+.detail-text-box {
+    text-align: center;
+    padding: 15px;
+    background: #fff;
+    border: 1px dashed #d4b483;
+    color: #888;
+}
+
+.similar-products {
+    margin-top: 40px;
+    padding-bottom: 50px;
+}
+
+.similar-products h3 {
+    text-align: center;
+    color: #b08d57;
+    margin-bottom: 20px;
+}
+
+.product-carousel-container {
+    display: flex;
+    align-items: center;    
+    justify-content: center;   
+    gap: 20px;                
+    width: 100%;
+}
+
+.item-wrapper {
+    display: flex;
+    gap: 15px;
+    width: 480px;            
+    justify-content: center;
+    overflow: hidden;    
+}
+
+.item-card {
+    flex: 0 0 150px;        
+    text-align: center;
+    background: transparent;
+}
+
+.item-box {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #d4b483;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.item-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.item-price {
+    font-size: 14px;
+    color: #b08d57;
+    font-weight: bold;
+}
+
+.arrow {
+    cursor: pointer;
+    font-size: 40px;
+    color: #b08d57;
+    user-select: none;
+    transition: 0.3s;
+    padding: 0 10px;
+}
+
+.arrow:hover {
+    color: #8e6f42;
+    transform: scale(1.2); 
+}

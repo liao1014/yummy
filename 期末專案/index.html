@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大吃一斤 || 首頁</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fffaf3;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8fadc;
+    border-radius: 0px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px
+}
+
+.logo img {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    right: 10cm;
+}
+
+.search-cart {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-cart input{
+    padding: 10px;
+    width: 400px;
+}
+
+.cart-btn img{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-btn img:hover{
+    transform: scale(1.2);
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.account {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.auth-form {
+    display: none;
+    position: absolute;
+    top: 60px; 
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.cancel-btn{
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cancel-btn:hover{
+    background-color: #bbb;
+}
+
+.auth-form .switch {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.auth-form .switch a {
+    color: blue;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 15px 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: #ffe3b3;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.nav a {
+    text-decoration: none; 
+    color: #000;          
+    font-weight: bold;
+    font-size: 18px;
+    padding: 8px 12px;    
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav a:hover {
+    color: #fff;
+    background-color: #ff7a00;
+    border-radius: 5px;
+}
+
+.section-title {
+    font-size: 20px;
+    margin: 20px 0 10px;
+}
+
+.product-area {
+    display: flex;
+    justify-content: space-between;
+    gap: 0px;
+}
+
+.product {
+    width: 30%;
+    margin: 0px;
+    text-align: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+}
+
+.product.show{
+    display: block;
+}
+.product a {
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-between; 
+    align-items: center;      
+    height: 300px;           
+    text-decoration: none;
+    color: #000;
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.product img {
+    width: 50%;     
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+.price {
+    color: #ff7a00;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+
+.footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    text-align: center;
+    background-color: #ffe3b3;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.footer a {
+    margin: 0 10px; 
+}
+
+.social-icon {
+    width: 40px;          
+    height: 40px;
+    transition: transform 0.3s;
+}
+
+.footer a:hover .social-icon {
+    transform: scale(1.2); 
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .product-area {
+        flex-direction: column;
+    }
+
+    .product {
+        width: 80%;
+    }
+
+    .search input {
+        width: 100%;
+    }
+
+    .auth-form {
+        top: 50px;
+        right: 5%;
+        width: 90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top-bar">
+        <div class="logo">
+            <img src="image/logo.png" alt="大吃一斤 Logo">
+            <span><h1>大吃一斤</h1></span>
+        </div>
+
+        <div class="search-cart">
+            <input type="text" placeholder="🔍搜尋商品">
+        
+
+            <a href="buycart.html" class="cart-btn">
+                <img src="image/images.png" alt="購物車">
+            </a>
+        </div>
+
+        <div class="account" id="accountArea">
+            <a href="membersign.html" span onclick="toggleAuthForm()" >登入 / 註冊</a>
+        </div>
+
+        <script>
+            const accountArea = document.getElementById("accountArea");
+
+            if (localStorage.getItem("isLogin") === "true") {
+                accountArea.innerHTML = `
+                    <span>登入成功</span>
+                    <a href="memberprofile.html" style="margin-left:10px;">會員中心</a>
+                `;
+            }else {
+                accountArea.innerHTML = `
+                <a href="membersign.html">登入 / 註冊</a>
+                `;
+            }
+        </script>
+    
+    </div>
+
+    <div class="nav">
+        <a href="#cookie">餅乾</a>
+        <a href="#candy">糖果</a>
+        <a href="#healthy">健康零食</a>
+    </div>
+
+    <div class="section-title">🔥 熱門推薦</div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <button onclick="prevProduct()">◀</button>
+        <button onclick="nextProduct()">▶</button>
+    </div>
+    
+
+    <div class="product-area">
+        <div class="product">
+            <a href="product_01.html">
+                <img src="image/chocolate cookies.jpg" alt="巧克力餅乾">
+                <div class="product-name">巧克力餅乾</div>
+                <div class="price">$50</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="product_02.html">
+                <img src="image/fruit candy.jpg" alt="水果軟糖">
+                <div class="product-name">水果軟糖</div>
+                <div class="price">$30</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="product_03.html">
+                <img src="image/nuts.jpg" alt="堅果組合">
+                <div class="product-name">堅果組合</div>
+                <div class="price">$100</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="product_05.html">
+                <img src="image/chips.jpg" alt="酥脆洋芋片">
+                <div class="product-name">酥脆洋芋片</div>
+                <div class="price">$40</div>
+            </a>
+        </div>
+        <div class="product">
+            <a href="product_04.html">
+                <img src="image/popcorn.jpg" alt="爆米花">
+                <div class="product-name">爆米花</div>
+                <div class="price">$70</div>
+            </a>
+        </div>
+    </div>
+
+<div class="footer">
+    <a href="https://www.instagram.com/" target="_blank">
+        <img src="image/instagram_739244.png" alt="IG" class="social-icon">
+    </a>
+    <a href="https://line.me/" target="_blank">
+        <img src="image/line_2374477.png" alt="LINE" class="social-icon">
+    </a>
+    <a href="https://www.facebook.com/" target="_blank">
+        <img src="image/social-media_13266170.png" alt="FB" class="social-icon">
+    </a>
+    <a href="intro.html">關於我們</a>
+</div>
+
+</div>
+
+<script>
+function toggleAuthForm() {
+    const form = document.getElementById("authForm");
+    form.style.display = form.style.display === "block" ? "none" : "block";
+}
+
+function showRegister() {
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("registerBox").style.display = "block";
+}
+
+function showLogin() {
+    document.getElementById("registerBox").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+}
+
+function closeAuthForm(){
+    document.getElementById("authForm").style.display="none";
+}
+
+let startIndex = 0;
+const showCount = 3;
+let autoPlayTimer;
+
+function updateProducts() {
+    const products = document.querySelectorAll(".product");
+    const total = products.length;
+
+    for (let i = 0; i < total; i++) {
+        products[i].classList.remove("show");
+        products[i].style.order = 0;
+    }
+
+    for (let i = 0; i < showCount; i++) {
+        const index = (startIndex + i) % total;
+        products[index].classList.add("show");
+        products[index].style.order = i + 1;
+    }
+
+    let orderCounter = showCount + 1;
+    for (let i = 0; i < total; i++) {
+        if (!products[i].classList.contains("show")) {
+            products[i].style.order = orderCounter;
+            orderCounter++;
+        }
+    }
+}
+
+function nextProduct() {
+    startIndex = (startIndex + 1) % document.querySelectorAll(".product").length;
+    updateProducts();
+}
+
+function prevProduct() {
+    const total = document.querySelectorAll(".product").length;
+    startIndex = (startIndex - 1 + total) % total;
+    updateProducts();
+}
+
+function startAutoPlay() {
+    autoPlayTimer = setInterval(nextProduct, 3000);
+}
+
+function resetAutoPlay() {
+    clearInterval(autoPlayTimer);
+    startAutoPlay();
+}
+
+updateProducts();
+startAutoPlay();
+
+document.querySelector("button[onclick='nextProduct()']")
+    .addEventListener("click", resetAutoPlay);
+document.querySelector("button[onclick='prevProduct()']")
+    .addEventListener("click", resetAutoPlay);
+</script>
+
+</body>
+</html>

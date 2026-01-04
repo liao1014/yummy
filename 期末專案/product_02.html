@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 - 商品詳細頁面</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="navbar">
+        <div class="nav-item">
+            <a href="index.html">
+                <img src="image/logo.png" alt="大吃一斤 Logo" class="nav-logo">
+            </a>
+        </div>
+        <div class="nav-item">
+            <input type="text" placeholder="搜尋商品..." class="search-bar">
+        </div>
+        <div class="nav-item">
+            <a href="buycart.html">
+                <img src="image/images.png" alt="購物車" class="nav-icon">
+            </a>
+        </div>
+    </nav>
+
+    <section class="product-main">
+        <div class="product-img">
+            <img src="image/fruit candy.jpg" alt="水果軟糖">
+        </div>
+        <div class="product-details">
+            <h1>水果軟糖</h1>
+            <p class="product-description">
+                濃縮純天然果汁萃取，嚼勁十足，果香四溢。
+            </p>
+            <div class="price-stock">NT$ 30 / 庫存：29</div>
+            
+            <div class="quantity-selector">
+                <span>數量</span>
+                <input type="number" value="1" min="1" id="qty-input">
+            </div>
+            
+            <button type="button" class="btn-submit" onclick="add()">送出</button>
+        </div>
+    </section>
+
+    <section class="product-info-section">
+        <h3>商品詳情</h3>
+        <div class="info-tabs">
+            <span class="tab-link" id="intro-btn">介紹</span> 
+            <span class="divider">/</span> 
+            <span class="tab-link" id="ingredient-btn">成分</span>
+        </div>
+        <div class="detail-text-box" id="detail-box">
+            點擊上方標籤查看更多詳細資訊。
+        </div>
+    </section>
+
+    <section class="similar-products">
+        <h3>類似商品</h3>
+        
+        <div class="product-carousel-container">
+            <div class="arrow" id="prev-btn">❮</div>
+            
+            <div class="item-wrapper" id="item-wrapper">
+                <div class="item-card">
+                    <a href="product_01.html">
+                        <div class="item-box"><img src="image/chocolate cookies.jpg" alt="巧克力餅乾"></div>
+                    </a>
+                    <div class="item-name">巧克力餅乾</div>
+                    <div class="item-price">$50</div>
+                </div>
+                
+                <div class="item-card">
+                    <a href="product_03.html">
+                        <div class="item-box"><img src="image/nuts.jpg" alt="堅果"></div>
+                    </a>
+                    <div class="item-name">堅果</div>
+                    <div class="item-price">$100</div>
+                </div>
+                
+                <div class="item-card">
+                    <a href="product_04.html">
+                        <div class="item-box"><img src="image/popcorn.jpg" alt="爆米花"></div>
+                    </a>
+                    <div class="item-name">爆米花</div>
+                    <div class="item-price">$70</div>
+                </div>
+                
+                <div class="item-card">
+                    <a href="product_05.html">
+                        <div class="item-box"><img src="image/chips.jpg" alt="洋芋片"></div>
+                    </a>
+                    <div class="item-name">洋芋片</div>
+                    <div class="item-price">$40</div>
+                </div>
+            </div>
+            
+            <div class="arrow" id="next-btn">❯</div>
+        </div>
+    </section>
+
+</div>
+ <script src="./core.js"></script>
+ <script>
+    const detailBox = document.getElementById("detail-box");
+    
+    document.getElementById("intro-btn").onclick = function() {
+        detailBox.innerText = "【產品介紹】造型繽紛，大人小孩都愛的不敗經典零食。";
+    };
+
+    document.getElementById("ingredient-btn").onclick = function() {
+        detailBox.innerText = "【商品成分】濃縮果汁、明膠、葡萄糖漿、檸檬酸。";
+    };
+
+    const wrapper = document.getElementById("item-wrapper");
+    const products = wrapper.getElementsByClassName("item-card");
+    const total = products.length;
+    const showCount = 3; 
+    let startIndex = 0;
+
+    function updateCarousel() {
+        for (let i = 0; i < total; i++) {
+            products[i].style.display = "none";
+        }
+
+        for (let i = 0; i < showCount; i++) {
+            const index = (startIndex + i) % total;
+            products[index].style.display = "block";
+            products[index].style.order = i; 
+        }
+    }
+
+    updateCarousel();
+
+    document.getElementById("next-btn").onclick = function() {
+        startIndex = (startIndex + 1) % total;
+        updateCarousel();
+    };
+
+    document.getElementById("prev-btn").onclick = function() {
+        startIndex = (startIndex - 1 + total) % total;
+        updateCarousel();
+    };
+    
+    function add() {
+        const qtyInput = document.getElementById("qty-input");
+        const product = {
+            name: "水果軟糖", 
+            price: 30,       
+            qty: Number(qtyInput.value)
+        };
+        
+        if (product.qty <= 0) {
+            alert("請選擇數量");
+            return;
+        }
+
+        addToCart(product); 
+        alert("已加入購物車！");
+    }
+</script>
+
+</body>
+</html>
