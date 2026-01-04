@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 || 訂單</title>
+    <link rel="stylesheet" href="buy.css">
+</head>
+<body>
+    <div class="buy01">
+        <h2>訂單已成立</h2>
+        <p>訂單編號<span id="orderId"></span></p>
+        <p>訂單狀態：已成立</p>
+        <p>訂單金額：$<span id="orderTotal"></span></p>
+        <a href="buyorderstate.html" class="set">查看訂單進度</a>
+    </div>
+
+    <script src="./core.js"></script>
+    <script>
+        const orderId = Date.now();
+        const cart = getCart();
+        let total = 0;
+
+        cart.forEach(item => {
+            const q = Number(item.qty) || 0;
+            const p = Number(item.price) || 0;
+            total += p * q;
+        });
+        
+        document.getElementById("orderId").textContent = orderId;
+        document.getElementById("orderTotal").textContent = total;
+        
+        const lastOrder = {
+            id: orderId,
+            total: total,
+            status: "訂單成立"
+        };
+        localStorage.setItem("lastOrder", JSON.stringify(lastOrder));
+
+        localStorage.removeItem("cart");
+    </script>
+</body>
+</html>
