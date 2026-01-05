@@ -1,0 +1,454 @@
+body {
+    font-family: "Microsoft JhengHei", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fffaf3;
+    color: #333333;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFE3B3; 
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0c89d;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.nav-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-logo, .nav-icon {
+    height: 40px;
+    width: auto;
+}
+
+.search-bar {
+    width: 90%;
+    height: 35px;
+    padding: 0 15px;
+    border-radius: 20px;
+    border: 1px solid #d4b483;
+    background-color: #ffffff;
+    outline: none;
+}
+
+.product-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 30px 0;
+    border-bottom: 1px solid #e0c89d;
+}
+
+.product-img {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-details {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.product-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.price-stock {
+    font-size: 20px;
+    color: #b08d57;
+    font-weight: bold;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-selector input {
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #d4b483;
+    border-radius: 4px;
+}
+
+.btn-submit {
+    background-color: #b08d57;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: fit-content;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #8e6f42;
+}
+
+.product-info-section {
+    padding: 30px 0;
+}
+
+.info-tabs {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    cursor: pointer;
+    color: #b08d57;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 18px;
+}
+
+.divider {
+    margin: 0 10px;
+    color: #ccc;
+}
+
+.detail-text-box {
+    text-align: center;
+    padding: 15px;
+    background: #fff;
+    border: 1px dashed #d4b483;
+    color: #888;
+}
+
+.similar-products {
+    margin-top: 40px;
+    padding-bottom: 50px;
+}
+
+.similar-products h3 {
+    text-align: center;
+    color: #b08d57;
+    margin-bottom: 20px;
+}
+
+.product-carousel-container {
+    display: flex;
+    align-items: center;    
+    justify-content: center;   
+    gap: 20px;                
+    width: 100%;
+}
+
+.item-wrapper {
+    display: flex;
+    gap: 15px;
+    width: 480px;            
+    justify-content: center;
+    overflow: hidden;    
+}
+
+.item-card {
+    flex: 0 0 150px;        
+    text-align: center;
+    background: transparent;
+}
+
+.item-box {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #d4b483;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.item-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-name {
+    font-size: 14px;
+    color: #333;
+}
+
+.item-price {
+    font-size: 14px;
+    color: #b08d57;
+    font-weight: bold;
+}
+
+.arrow {
+    cursor: pointer;
+    font-size: 40px;
+    color: #b08d57;
+    user-select: none;
+    transition: 0.3s;
+    padding: 0 10px;
+}
+
+.arrow:hover {
+    color: #8e6f42;
+    transform: scale(1.2); 
+}
+
+
+.comment-section {
+    max-width: 900px;
+    margin: 40px auto;
+    font-family: "Microsoft JhengHei", sans-serif;
+}
+
+
+.rating-summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    color: #333;
+}
+.stars { color: #f39c12; font-size: 20px; }
+.score-avg { font-size: 20px; font-weight: bold; }
+.total-count { color: #888; }
+
+
+.add-comment-box {
+    background: #fdfdfd;
+    padding: 15px;
+    border: 1px dashed #ccc;
+    margin-bottom: 30px;
+}
+.add-comment-box input, .add-comment-box textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.btn-add {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+}
+
+
+.comment-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.user-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+.comment-body {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+}
+
+
+#comment-list {
+    max-height: 500px;    
+    overflow-y: auto;    
+    padding-right: 15px;  
+    border: 1px solid #f1f1f1; 
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+
+#comment-list::-webkit-scrollbar {
+    width: 6px;
+}
+#comment-list::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+}
+#comment-list::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 10px;
+}
+#comment-list::-webkit-scrollbar-thumb:hover {
+    background: #999; 
+}
+
+
+.scrollable-comment-box {
+    max-height: 150px;    
+    overflow-y: auto;     
+    border: 1px solid #eeeeee; 
+    border-radius: 8px;    
+    padding:10px 15px;       
+    background-color: #ffffff;
+    margin-top: 20px;
+}
+
+
+.scrollable-comment-box::-webkit-scrollbar {
+    width: 8px;
+}
+.scrollable-comment-box::-webkit-scrollbar-track {
+    background: #f9f9f9; 
+    border-radius: 10px;
+}
+.scrollable-comment-box::-webkit-scrollbar-thumb {
+    background: #d1d1d1; 
+    border-radius: 10px;
+}
+.scrollable-comment-box::-webkit-scrollbar-thumb:hover {
+    background: #b1b1b1; 
+}
+
+.comment-section {
+    margin-top: 60px;
+    border-top: 2px solid #f1f1f1;
+    padding-top: 30px;
+    font-family: "Microsoft JhengHei", sans-serif;
+}
+
+
+.rating-summary {
+    margin: 15px 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stars-display {
+    color: #f39c12;
+    font-size: 20px;
+}
+
+
+.add-comment-box {
+    background: #fdfdfd;
+    padding: 20px;
+    border: 1px dashed #bbb;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.add-comment-box input, 
+.add-comment-box textarea,
+.add-comment-box select {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+.btn-add {
+    background-color: #e67e22; /* 暖橘色，適合食品 */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 100%;
+    transition: background 0.3s;
+}
+
+.btn-add:hover {
+    background-color: #d35400;
+}
+
+.scrollable-comment-box {
+    max-height: 400px;   
+    overflow-y: auto;     
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fff;
+    margin-top: 15px;
+}
+
+
+.scrollable-comment-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-comment-box::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+
+.stars-display, .comment-stars, .stars {
+    color: #f39c12 !important; 
+    font-size: 16px;           
+    letter-spacing: 2px;      
+    display: inline-block;
+}
+
+
+.comment-item {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 12px 5px;
+    text-align: left;
+}
+
+.comment-user {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+}
+.comment-user span {
+    margin-left: 10px;
+}
+
+.comment-text {
+    color: #444;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.comment-item:last-child {
+    border-bottom: none;
+}

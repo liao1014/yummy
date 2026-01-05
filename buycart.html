@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 || 購物車</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        .cart-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ffe3b3;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #fffcf8;
+            border-radius: 12px;
+            border-left: 6px solid #ff7a00; /* 你喜歡的橘色邊框 */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            flex: 2;
+        }
+
+        .item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 20px;
+            border-radius: 8px;
+            background-color: #eee;
+        }
+
+        .item-detail h4 {
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .item-detail p {
+            margin: 5px 0 0;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: center;
+            gap: 0; /* 讓按鈕跟輸入框黏在一起 */
+        }
+
+        .qty-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover { background: #ffe3b3; }
+
+        .qty-input {
+            width: 50px;
+            height: 35px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .item-subtotal {
+            flex: 1;
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d35400;
+        }
+
+        .del-btn {
+            margin-left: 25px;
+            background: #ffeded;
+            color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .del-btn:hover {
+            background: #ff4d4d;
+            color: #fff;
+        }
+
+        .cart-summary {
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #ffe3b3;
+        }
+
+        #totalPrice {
+            font-size: 28px;
+            color: #ff7a00;
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <a href="index.html"><img src="image/logo.png" alt="大吃一斤 Logo"></a>
+        </div>
+        <div class="search-cart">
+            <input type="text" placeholder="搜尋商品..." id="search-input">
+            <div class="cart-btn">
+                <a href="buycart.html"><img src="image/images.png" alt="購物車"></a>
+            </div>
+            <div class="account"><a href="memberset.html">👤</a></div>
+        </div>
+    </header>
+
+    <div class="cart-container">
+        <h2>您的購物車</h2>
+        <div id="list">
+            </div>
+
+        <div class="cart-summary">
+            <h3>總金額：NT$ <span id="totalPrice">0</span></h3>
+            <br>
+            <button class="set" style="padding: 10px 30px; background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 18px;" onclick="goCheckout()">前往結帳</button>
+        </div>
+    </div>
+
+    <script src="./core.js"></script>
+    <script>
+        let cart = getCart();
+        const list = document.getElementById("list");
+        const totalDisplay = document.getElementById("totalPrice");
+
+        function render() {
+            list.innerHTML = "";
+            let total = 0;
+
+            if (cart.length === 0) {
+                list.innerHTML = "<div style='text-align:center; padding: 50px;'>購物車是空的，快去逛逛吧！</div>";
+                totalDisplay.innerText = "0";
+                return;
+            }
+
+            cart.forEach((p, i) => {
+                const itemQty = Number(p.qty) || 0;
+                const itemTotal = p.price * itemQty;
+                total += itemTotal;
+
+                const imgSrc = p.img || 'image/logo.png';
+
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <div class="item-info">
+                            <img src="${imgSrc}" class="item-img">
+                            <div>
+                                <div style="font-weight:bold;">${p.name}</div>
+                                <div style="color:#888; font-size:12px;">單價: $${p.price}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQty(${i}, -1)">-</button>
+                            <input type="text" class="qty-input" value="${itemQty}" readonly>
+                            <button class="qty-btn" onclick="updateQty(${i}, 1)">+</button>
+                        </div>
+
+                        <div class="item-subtotal">$${itemTotal}</div>
+                        
+                        <button class="del-btn" onclick="del(${i})">移除</button>
+                    </div>`;
+            });
+            totalDisplay.innerText = total;
+        }
+
+        function updateQty(index, change) {
+            cart[index].qty = Number(cart[index].qty) + change;
+
+            if (cart[index].qty < 1) {
+                cart[index].qty = 1;
+            }
+            
+            saveCart(cart); 
+            render();   
+        }
+
+        function del(i) {
+            if(confirm("確定要移除這個商品嗎？")) {
+                cart.splice(i, 1);
+                saveCart(cart);
+                render();
+            }
+        }
+
+        function goCheckout() {
+            if (cart.length === 0) {
+                alert("購物車內沒有商品！");
+                return;
+            }
+
+            const isLoginStatus = localStorage.getItem("isLogin");
+            
+            if (isLoginStatus === "true") {
+                location.href = "buycheck.html";
+            } else {
+                alert("請先登入會員再進行結帳");
+                location.href = "membersign.html?from=cart";
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>

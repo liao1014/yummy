@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 || 訂單</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        .nav {
+            background-color: #ff7a00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 10px 0;
+        }
+
+        .nav a, .dropdown button {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-menu a {
+            color: #333 !important;
+            padding: 10px;
+            display: block;
+            font-weight: normal;
+        }
+        .dropdown-menu a:hover { background-color: #fff3e0; }
+
+        .order-success-container {
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .btn-group {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <a href="index.html"><img src="image/logo.png" alt="大吃一斤 Logo"></a>
+        </div>
+        <div class="search-cart">
+            <div class="cart-btn">
+                <a href="buycart.html"><img src="image/images.png" style="width:35px; height:35px;"></a>
+            </div>
+            <div class="account"><a href="memberset.html">👤</a></div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <a href="index.html">首頁</a>
+        <div class="dropdown">
+            <button>商品分類</button>
+            <div class="dropdown-menu">
+                <a href="#">餅乾類</a>
+                <a href="#">糖果類</a>
+                <a href="#">堅果類</a>
+            </div>
+        </div>
+        <a href="buyorderstate.html">訂單查詢</a>
+    </nav>
+
+    <div class="buy01" style="padding: 60px 20px; text-align: center;">
+        <h2 style="color: #27ae60; font-size: 28px;">訂單已成功成立！</h2>
+        <p style="margin: 20px 0; color: #666; font-size: 18px;">感謝您的訂購，我們已收到您的訂單。</p>
+        
+        <div style="background: #f9f9f9; padding: 20px; border-radius: 10px; display: inline-block; margin-bottom: 30px; border: 1px solid #eee;">
+            <p>訂單編號：<strong id="displayOrderId">產生中...</strong></p>
+            <p>訂單總金額：<strong id="displayTotal" style="color: #d35400;">$0</strong></p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="buyorderstate.html" class="set">查看訂單進度</a>
+            <a href="index.html" class="set" style="background-color: #95a5a6; border:none; margin-left: 10px;">回首頁逛逛</a>
+        </div>
+    </div>
+
+    <script src="./core.js"></script>
+    <script>
+        const lastOrder = JSON.parse(localStorage.getItem("lastOrder"));
+
+        if (lastOrder) {
+            document.getElementById("displayOrderId").textContent = lastOrder.id;
+            document.getElementById("displayTotal").textContent = "$" + lastOrder.total;
+        } else {
+            const cart = getCart();
+            let total = 0;
+            cart.forEach(item => {
+                total += (Number(item.price) || 0) * (Number(item.qty) || 0);
+            });
+            
+            const newOrderId = "SN" + Date.now();
+            document.getElementById("displayOrderId").textContent = newOrderId;
+            document.getElementById("displayTotal").textContent = "$" + total;
+
+            localStorage.setItem("lastOrder", JSON.stringify({
+                id: newOrderId,
+                total: total,
+                status: "訂單成立"
+            }));
+
+            localStorage.removeItem("cart");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 - 商品詳細頁面</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <nav class="navbar">
+        <div class="nav-item">
+            <a href="index.html">
+                <img src="image/logo.png" alt="大吃一斤 Logo" class="nav-logo">
+            </a>
+        </div>
+        <div class="nav-item">
+            <input type="text" placeholder="搜尋商品..." class="search-bar">
+        </div>
+        <div class="nav-item">
+            <a href="buycart.html">
+                <img src="image/images.png" alt="購物車" class="nav-icon">
+            </a>
+        </div>
+    </nav>
+
+    <section class="product-main">
+        <div class="product-img">
+            <img src="image/fruit candy.jpg" alt="水果軟糖">
+        </div>
+        <div class="product-details">
+            <h1>水果軟糖</h1>
+            <p class="product-description">
+                濃縮純天然果汁萃取，嚼勁十足，果香四溢。
+            </p>
+            <div class="price-stock">NT$ 30 / 庫存：29</div>
+            
+            <div class="quantity-selector">
+                <span>數量</span>
+                <input type="number" value="1" min="1" id="qty-input">
+            </div>
+            
+            <button type="button" class="btn-submit" onclick="add()">送出</button>
+        </div>
+    </section>
+
+    <section class="product-info-section">
+        <h3>商品詳情</h3>
+        <div class="info-tabs">
+            <span class="tab-link" id="intro-btn">介紹</span> 
+            <span class="divider">/</span> 
+            <span class="tab-link" id="ingredient-btn">成分</span>
+        </div>
+        <div class="detail-text-box" id="detail-box">
+            點擊上方標籤查看更多詳細資訊。
+        </div>
+    </section>
+
+    <section class="comment-section">
+        <h3>商品評分與評論</h3>
+        
+        <div class="rating-summary">
+            <span id="big-stars" class="stars-display" style="color: #f39c12;">★★★★★</span>
+            <strong><span id="average-score">0.0</span> / 5</strong>
+            <span style="color: #888; font-size: 13px; margin-left: 10px;">(共 <span id="count-num">0</span> 則)</span>
+        </div>
+
+        <div class="add-comment-box">
+            <div style="margin-bottom: 10px;">
+                <span>給個評分：</span>
+                <select id="admin-rating">
+                    <option value="5">5 顆星</option>
+                    <option value="4">4 顆星</option>
+                    <option value="3">3 顆星</option>
+                    <option value="2">2 顆星</option>
+                    <option value="1">1 顆星</option>
+                </select>
+            </div>
+            <input type="text" id="admin-name" placeholder="稱呼（如：林小姐）">
+            <textarea id="admin-content" rows="3" placeholder="輸入評論內容..."></textarea>
+            <button type="button" class="btn-add" onclick="addNewComment()">新增評論</button>
+        </div>
+
+        <div id="comment-list" class="scrollable-comment-box">
+            <div class="comment-item"><div class="comment-user">張菊 <span class="comment-stars">★★★★☆</span></div><div class="comment-text">酸甜適中，給小朋友當零嘴很放心。</div></div>
+            <div class="comment-item"><div class="comment-user">科批  <span class="comment-stars">★★★★★</span></div><div class="comment-text">很有嚼勁，而且果香味很天然。</div></div>
+            <div class="comment-item"><div class="comment-user">柯比 <span class="comment-stars">★★★★☆</span></div><div class="comment-text">包裝很可愛，拿來送禮也很適合。</div></div>
+            <div class="comment-item"><div class="comment-user">燈燈  <span class="comment-stars">★★★★★</span></div><div class="comment-text">每一口都像在吃新鮮水果。</div></div>
+            <div class="comment-item"><div class="comment-user">詹詹 <span class="comment-stars">★★★★☆</span></div><div class="comment-text">口感Q彈，不會黏牙。</div></div>
+        </div>
+    </section>
+
+    <section class="similar-products">
+        <h3>類似商品</h3>
+        
+        <div class="product-carousel-container">
+            <div class="arrow" id="prev-btn">❮</div>
+            
+            <div class="item-wrapper" id="item-wrapper">
+                <div class="item-card">
+                    <a href="product_01.html">
+                        <div class="item-box"><img src="image/chocolate cookies.jpg" alt="巧克力餅乾"></div>
+                    </a>
+                    <div class="item-name">巧克力餅乾</div>
+                    <div class="item-price">$50</div>
+                </div>
+                
+                <div class="item-card">
+                    <a href="product_03.html">
+                        <div class="item-box"><img src="image/nuts.jpg" alt="堅果"></div>
+                    </a>
+                    <div class="item-name">堅果</div>
+                    <div class="item-price">$100</div>
+                </div>
+                
+                <div class="item-card">
+                    <a href="product_04.html">
+                        <div class="item-box"><img src="image/popcorn.jpg" alt="爆米花"></div>
+                    </a>
+                    <div class="item-name">爆米花</div>
+                    <div class="item-price">$70</div>
+                </div>
+                
+                <div class="item-card">
+                    <a href="product_05.html">
+                        <div class="item-box"><img src="image/chips.jpg" alt="洋芋片"></div>
+                    </a>
+                    <div class="item-name">洋芋片</div>
+                    <div class="item-price">$40</div>
+                </div>
+            </div>
+            
+            <div class="arrow" id="next-btn">❯</div>
+        </div>
+    </section>
+
+</div>
+ <script src="./core.js"></script>
+ <script>
+let allRatings = [4, 5, 4, 5, 4]; 
+
+function updateStatisticsDisplay() {
+    const countNum = document.getElementById('count-num');
+    const avgScoreDisplay = document.getElementById('average-score');
+    const bigStars = document.getElementById('big-stars');
+
+    if (allRatings.length > 0) {
+    
+        countNum.innerText = allRatings.length;
+
+   
+        const sum = allRatings.reduce((a, b) => a + b, 0);
+        const avg = (sum / allRatings.length).toFixed(1);
+        avgScoreDisplay.innerText = avg;
+
+      
+        const roundedAvg = Math.round(parseFloat(avg));
+        bigStars.innerText = "★".repeat(roundedAvg) + "☆".repeat(5 - roundedAvg);
+    }
+}
+
+
+window.addEventListener('load', function() {
+    updateStatisticsDisplay();
+});
+
+function addNewComment() {
+    const nameInput = document.getElementById('admin-name');
+    const contentInput = document.getElementById('admin-content');
+    const ratingInput = document.getElementById('admin-rating');
+    const list = document.getElementById('comment-list');
+    const countNum = document.getElementById('count-num');
+    const avgScoreDisplay = document.getElementById('average-score');
+
+    const name = nameInput.value.trim();
+    const content = contentInput.value.trim();
+    const score = parseInt(ratingInput.value);
+
+    if (name === "" || content === "") {
+        alert("請填寫稱呼與評論內容！");
+        return;
+    }
+
+    const productName = document.querySelector('.product-details h1').innerText;
+
+    let memberReviews = JSON.parse(localStorage.getItem("memberReviews")) || [];
+    const newMemberReview = {
+        product: productName, 
+        rating: score,  
+        comment: content,     
+        time: new Date().toLocaleDateString()
+    };
+    memberReviews.push(newMemberReview);
+    localStorage.setItem("memberReviews", JSON.stringify(memberReviews));
+ 
+    allRatings.push(score);
+    const sum = allRatings.reduce((a, b) => a + b, 0);
+    const avg = (sum / allRatings.length).toFixed(1);
+    countNum.innerText = allRatings.length;
+    avgScoreDisplay.innerText = avg;
+
+    const newDiv = document.createElement('div');
+    newDiv.className = 'comment-item';
+    newDiv.innerHTML = `
+        <div style="font-weight: bold; margin-bottom: 5px;">
+            ${name} 
+            <span style="color: #f39c12; margin-left: 10px;">${"★".repeat(score)}${"☆".repeat(5-score)}</span>
+        </div>
+        <div style="color: #555; line-height: 1.5;">${content}</div>
+    `;
+    list.insertBefore(newDiv, list.firstChild);
+    list.scrollTop = 0;
+
+    nameInput.value = "";
+    contentInput.value = "";
+    alert("評價已送出，您可以在會員中心查看到！");
+}
+
+
+const detailBox = document.getElementById("detail-box");
+document.getElementById("intro-btn").onclick = function() {
+    detailBox.innerText = "【產品介紹】造型繽紛，大人小孩都愛的不敗經典零食。";
+};
+document.getElementById("ingredient-btn").onclick = function() {
+    detailBox.innerText = "【商品成分】濃縮果汁、明膠、葡萄糖漿、檸檬酸。";
+};
+
+
+const wrapper = document.getElementById("item-wrapper");
+const products = wrapper.getElementsByClassName("item-card");
+const total = products.length;
+let startIndex = 0;
+
+function updateCarousel() {
+    for (let i = 0; i < total; i++) {
+        products[i].style.display = "none";
+    }
+    for (let i = 0; i < 3; i++) {
+        const index = (startIndex + i) % total;
+        products[index].style.display = "block";
+    }
+}
+updateCarousel();
+
+document.getElementById("next-btn").onclick = function() {
+    startIndex = (startIndex + 1) % total;
+    updateCarousel();
+};
+document.getElementById("prev-btn").onclick = function() {
+    startIndex = (startIndex - 1 + total) % total;
+    updateCarousel();
+};
+    
+    function add() {
+        const qtyInput = document.getElementById("qty-input");
+        const product = {
+            name: "水果軟糖", 
+            price: 30,       
+            qty: Number(qtyInput.value)
+        };
+        
+        if (product.qty <= 0) {
+            alert("請選擇數量");
+            return;
+        }
+
+        addToCart(product); 
+        alert("已加入購物車！");
+    }
+
+
+</script>
+
+</body>
+</html>

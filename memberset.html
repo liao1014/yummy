@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 || 會員註冊</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        .member-container {
+            display: flex; 
+            max-width: 1200px;
+            margin: 30px auto;
+            min-height: 600px;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border: 1px solid #ffe3b3;
+            border-radius: 12px;
+            padding: 20px 0;
+            flex-shrink: 0; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            font-size: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+
+        .menu-list { list-style: none; padding: 0; }
+        .menu-item {
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #555;
+            font-weight: bold;
+        }
+        .menu-item:hover { background-color: #fff7e6; color: #ff7a00; }
+        .menu-item.active { background-color: #ff7a00; color: white; }
+
+        .content-area {
+            flex-grow: 1; 
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .content-section { display: none; }
+        .content-section.active { display: block; } 
+
+        #profile-form input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        button[type="submit"] {
+            background-color: #ff7a00;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-box { padding: 20px; margin-top: auto; }
+        .logout-btn {
+            width: 100%;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .logout-btn:hover { background-color: #cc0000; }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; color: black;">
+                <img src="image/logo.png" alt="大吃一斤 Logo" style="height: 60px; width: 60px; border-radius: 50%;">
+                <h1 style="margin-left:10px; font-size: 22px;">大吃一斤</h1>
+            </a>
+        </div>
+        <div class="search-cart">
+            <input type="text" placeholder="🔍搜尋商品..." style="padding: 8px; width: 250px; border-radius: 20px; border: 1px solid #ddd;">
+            <a href="buycart.html"><img src="image/images.png" alt="購物車" style="width: 35px; height: 35px;"></a>
+            <a href="memberset.html" style="font-size: 24px; text-decoration: none;">👤</a>
+        </div>
+    </header>
+
+    <div class="member-container">
+        <aside class="sidebar">
+            <h2>會員中心</h2>
+            <ul class="menu-list">
+                <li id="li-profile" class="menu-item active" onclick="switchTab('profile')">修改會員資料</li>
+                <li id="li-orders" class="menu-item" onclick="switchTab('orders')">歷史訂單紀錄</li>
+                <li id="li-reviews" class="menu-item" onclick="switchTab('reviews')">我的評價</li>
+                <li id="li-service" class="menu-item" onclick="switchTab('service')">客服專區</li>
+                <li id="li-faq" class="menu-item" onclick="switchTab('faq')">常見問題</li>
+            </ul>
+            <div class="logout-box">
+                <button class="logout-btn" onclick="logout()">登出帳號</button>
+            </div>
+        </aside>
+    
+        <main class="content-area">
+            <section id="profile" class="content-section active">
+                <h3 style="border-bottom: 2px solid #ff7a00; padding-bottom: 10px; margin-bottom: 20px;">修改會員資料</h3>
+                <form id="profile-form">
+                    <p style="margin-bottom: 20px;">帳號 (Email): <span id="display-email" style="font-weight: bold; color: #666;"></span></p>
+                    <label>姓名: <br><input type="text" id="edit-name" style="width: 300px;" required></label><br><br>
+                    <label>電話: <br><input type="tel" id="edit-tel" style="width: 300px;"></label><br><br>
+                    <label>地址: <br><input type="text" id="edit-address" style="width: 90%;"></label><br><br>
+                    <button type="submit">儲存修改資訊</button>
+                </form>
+            </section>
+    
+            <section id="orders" class="content-section">
+                <h3>歷史訂單紀錄</h3>
+                <table style="width:100%; border-collapse: collapse; margin-top: 20px;" border="0">
+                    <thead>
+                        <tr style="background-color: #fff7e6; border-bottom: 2px solid #ffe3b3;">
+                            <th style="padding: 15px;">訂單編號</th>
+                            <th style="padding: 15px;">金額</th>
+                            <th style="padding: 15px;">狀態</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-list-body" style="text-align: center;"></tbody>
+                </table>
+            </section>
+
+            <section id="reviews" class="content-section"><h3>我的評價</h3><div id="review-list"></div></section>
+            <section id="service" class="content-section"><h3>客服專區</h3><textarea rows="5" style="width: 100%; border: 1px solid #ddd;"></textarea><br><button class="logout-btn" style="width: auto; margin-top: 10px;">送出</button></section>
+            <section id="faq" class="content-section"><h3>常見問題</h3><ul><li>Q:零食的保存期限？ A: 詳請看包裝袋。</li></ul></section>
+        </main>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+            const targetSection = document.getElementById(tabId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+            }
+            document.querySelectorAll('.menu-list li').forEach(item => item.classList.remove('active'));
+            const activeLi = document.getElementById('li-' + tabId);
+            if (activeLi) {
+                activeLi.classList.add('active');
+            }
+            if (tabId === 'orders') {
+                renderOrders();
+            } else if (tabId === 'reviews') {
+                renderReviews();
+            }
+        }
+
+        function init() {
+            if (localStorage.getItem("isLogin") !== "true") {
+                alert("請先登入！");
+                location.href = "membersign.html";
+                return;
+            }
+
+            const member = JSON.parse(localStorage.getItem("memberData")) || {
+                name: "新會員", email: "user@example.com", phone: "", address: ""
+            };
+
+            document.getElementById("display-email").innerText = member.email;
+            document.getElementById("edit-name").value = member.name;
+            document.getElementById("edit-tel").value = member.phone || "";
+            document.getElementById("edit-address").value = member.address || "";
+        }
+
+        document.getElementById("profile-form").onsubmit = function(e) {
+            e.preventDefault();
+            let member = JSON.parse(localStorage.getItem("memberData")) || {};
+            member.name = document.getElementById("edit-name").value;
+            member.phone = document.getElementById("edit-tel").value;
+            member.address = document.getElementById("edit-address").value;
+
+            localStorage.setItem("memberData", JSON.stringify(member));
+            alert("資料已更新！");
+        };
+
+        function renderReviews() {
+            const reviews = JSON.parse(localStorage.getItem("memberReviews")) || [];
+            const reviewList = document.getElementById("review-list");
+            
+            reviewList.innerHTML = "";
+
+            if (reviews.length === 0) {
+                reviewList.innerHTML = "<p style='color: gray; text-align: center; padding: 20px;'>目前尚無評價紀錄。</p>";
+                return;
+            }
+
+            reviews.reverse().forEach(r => {
+                const stars = "★".repeat(r.rating) + "☆".repeat(5 - r.rating);
+                reviewList.innerHTML += `
+                    <div style="border-bottom: 1px solid #eee; padding: 15px 0; margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <strong style="color: #ff7a00; font-size: 18px;">${r.product}</strong>
+                            <span style="color: gold; letter-spacing: 2px;">${stars}</span>
+                        </div>
+                        <p style="font-size: 15px; color: #444; margin: 10px 0; background: #f9f9f9; padding: 10px; border-radius: 5px;">
+                            ${r.comment || '未填寫評論內容'}
+                        </p>
+                        <small style="color: #999;">評價日期：${r.time || '未知'}</small>
+                    </div>`;
+            });
+        }
+        function renderOrders() {
+            const orderBody = document.getElementById("order-list-body");
+            const orders = JSON.parse(localStorage.getItem("all_orders")) || [];
+            orderBody.innerHTML = "";
+            if (orders.length === 0) {
+                orderBody.innerHTML = "<tr><td colspan='3' style='padding:40px; color:#999;'>尚無消費紀錄</td></tr>";
+                return;
+            }
+            [...orders].reverse().forEach(order => {
+                orderBody.innerHTML += `
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding:15px;">${order.id}</td>
+                        <td>$${order.total}</td>
+                        <td><span style="color: #ff7a00; font-weight:bold;">${order.status || '處理中'}</span></td>
+                    </tr>`;
+            });
+        }
+
+        function logout() {
+            localStorage.setItem("isLogin", "false");
+            alert("已登出帳號");
+            location.href = "index.html";
+        }
+
+        init();
+    </script>
+</body>
+</html>

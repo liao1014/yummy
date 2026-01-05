@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大吃一斤 || 下單</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        .buy01 form { text-align: left; max-width: 400px; margin: 0 auto; }
+        .buy01 label { display: block; margin-bottom: 15px; font-weight: bold; }
+        .buy01 input { 
+            width: 100%; padding: 10px; margin-top: 5px; 
+            border: 1px solid #ddd; border-radius: 5px; 
+        }
+        .total { 
+            font-size: 20px; color: #d35400; font-weight: bold; 
+            margin: 20px 0; border-top: 1px dashed #ffe3b3; padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo"><a href="index.html"><img src="image/logo.png"></a></div>
+        <div class="search-cart">
+            <input type="text" placeholder="搜尋商品...">
+            <div class="cart-btn"><a href="buycart.html"><img src="image/images.png" style="width:35px; height:35px;"></a></div>
+            <div class="account"><a href="memberset.html">👤</a></div>
+        </div>
+    </header>
+
+    <div class="buy01">
+        <h2>填寫收件資訊</h2>
+        <form id="orderForm">
+            <label>收件人姓名 <input type="text" id="name" required placeholder="請輸入姓名"></label>
+            <label>聯絡電話 <input type="tel" id="phone" required placeholder="請輸入電話"></label>
+            <label>配送地址 <input type="text" id="address" required placeholder="請輸入完整地址"></label>
+
+            <label>付款方式
+                <select id="paymentMethod" required style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="" disabled selected>請選擇付款方式</option>
+                    <option value="貨到付款">貨到付款</option>
+                    <option value="Apple Pay">Apple Pay</option>
+                    <option value="Line Pay">Line Pay</option>
+                    <option value="信用卡">信用卡</option>
+                </select>
+            </label>
+            
+        
+            <div class="total">應付總金額：$<span id="orderTotal">0</span></div>
+            <button type="submit" class="set" style="width:100%; border:none; cursor:pointer;">確認下單</button>
+        </form>
+    </div>
+
+    <script src="./core.js"></script>
+    <script>
+        const cart = getCart();
+        const totalSpan = document.getElementById("orderTotal");
+        const total = cart.reduce((t, p) => t + (Number(p.price) * (Number(p.qty) || 1)), 0);
+        totalSpan.innerText = total;
+
+        document.getElementById("orderForm").onsubmit = function(e) {
+            e.preventDefault(); 
+            const payMethod = document.getElementById("paymentMethod").value;
+
+            const orderId = "SN" + Date.now();
+            const orderData = {
+                id: orderId,
+                customer: {
+                    name: document.getElementById("name").value,
+                    phone: document.getElementById("phone").value,
+                    address: document.getElementById("address").value
+                },
+                payment: payMethod,
+                items: cart,
+                total: total,
+                time: new Date().toLocaleString(),
+                status: "訂單成立"
+            };
+
+            saveOrder(orderData); 
+            localStorage.setItem("lastOrder", JSON.stringify(orderData)); 
+            localStorage.removeItem("cart"); 
+            
+            alert("下單成功！付款方式：" + payMethod);
+            location.href = "buyorder.html"; 
+        };
+    </script> 
+</body>
+</html>
